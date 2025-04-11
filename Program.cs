@@ -32,14 +32,18 @@ class Program {
       Random random = new Random();
       Console.Write("Введите размер первой матрицы:");
       int sizeA = Convert.ToInt32(Console.ReadLine());
+
       Console.Write("Введите размер второй матрицы:");
       int sizeB = Convert.ToInt32(Console.ReadLine());
+
       matrixA = new SquareMatrixExtensions(sizeA, random);
       SquareMatrix matrixB = new SquareMatrix(sizeB, random);
+
       Console.WriteLine("Матрица А");
       Console.WriteLine(matrixA);
       Console.WriteLine("Матрица Б");
       Console.WriteLine(matrixB);
+
       Console.WriteLine("1. Сложить две матрицы.");
       Console.WriteLine("2. Умножить матрицу А на Б");
       Console.WriteLine("3. Сравнить две матрицы");
@@ -66,6 +70,7 @@ class Program {
       int size = Convert.ToInt32(Console.ReadLine());
       matrixA = new SquareMatrixExtensions(size, random);
       Console.WriteLine(matrixA);
+
       Console.WriteLine("1. Выполнить проверку на матрицу(нулевая/не нулевая).");
       Console.WriteLine("2. Создать клон матрицы.");
       Console.WriteLine("3. Найти определитель матрицы.");

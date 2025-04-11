@@ -90,6 +90,7 @@ class SquareMatrix {
   public static bool operator false(SquareMatrix a) {
     return a.GetSumOfElements() == 0;
   }
+
   public int Determinant() {
     if (Size == 1)
       return matrix[0, 0];
@@ -114,15 +115,19 @@ class SquareMatrix {
     int[,] minor = new int[Size - 1, Size - 1];
     int minorRow = 0, minorCol = 0;
       for (int countOfLines = 0; countOfLines < Size; ++countOfLines) {
-        if (countOfLines == row) continue; // Пропускаем строку row
+      if (countOfLines == row) {
+        continue; // Пропускаем строку row
+      }
 
         for(int countOfColumns = 0; countOfColumns < Size; ++countOfColumns) {
-          if (countOfColumns == col) continue; // Пропускаем столбец col
+        if (countOfColumns == col) {
+          continue; // Пропускаем столбец col
+        }
 
         minor[minorRow, minorCol] = matrix[countOfLines, countOfColumns];
-        minorCol++;
+        ++minorCol;
       }
-      minorRow++;
+      ++minorRow;
       minorCol = 0;
     }
     return minor;
