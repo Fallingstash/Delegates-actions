@@ -8,6 +8,7 @@ class SquareMatrix {
   public SquareMatrix(int[,] matrix) {
     this.matrix = matrix;
   }
+  public SquareMatrix() { }
 
   public SquareMatrix(int size) {
     Size = size;
@@ -47,7 +48,7 @@ class SquareMatrix {
     if (a.Size != b.Size) {
       throw new MatrixSizeException("Количество стобцов первой матрицы, должно быть равно количеству строк второй!");
     }
-    SquareMatrix result = new SquareMatrix(a.Size); // реализуем умножение матриц... 
+    SquareMatrix result = new SquareMatrix(a.Size); 
     for (int countOfLines = 0; countOfLines < a.Size; ++countOfLines) {
       for (int countOfColumns = 0; countOfColumns < a.Size; ++countOfColumns) {
         for (int countOfRepeats = 0; countOfRepeats < a.Size; ++countOfRepeats) {
@@ -91,13 +92,12 @@ class SquareMatrix {
   }
   public int Determinant() {
     if (Size == 1)
-      return matrix[0, 0]; // Определитель матрицы 1x1
+      return matrix[0, 0];
 
     if (Size == 2)
-      return matrix[0, 0] * matrix[1, 1] - matrix[0, 1] * matrix[1, 0]; // Определитель матрицы 2x2
-
+      return matrix[0, 0] * matrix[1, 1] - matrix[0, 1] * matrix[1, 0]; 
     int det = 0;
-    for (int col = 0; col < Size; col++) {
+    for (int col = 0; col < Size; ++col) {
       int[,] minor = GetMinor(0, col);
       SquareMatrix minorMatrix = new SquareMatrix(minor);
 
@@ -113,14 +113,13 @@ class SquareMatrix {
   private int[,] GetMinor(int row, int col) {
     int[,] minor = new int[Size - 1, Size - 1];
     int minorRow = 0, minorCol = 0;
+      for (int countOfLines = 0; countOfLines < Size; ++countOfLines) {
+        if (countOfLines == row) continue; // Пропускаем строку row
 
-    for (int i = 0; i < Size; i++) {
-      if (i == row) continue; // Пропускаем строку row
+        for(int countOfColumns = 0; countOfColumns < Size; ++countOfColumns) {
+          if (countOfColumns == col) continue; // Пропускаем столбец col
 
-      for (int j = 0; j < Size; j++) {
-        if (j == col) continue; // Пропускаем столбец col
-
-        minor[minorRow, minorCol] = matrix[i, j];
+        minor[minorRow, minorCol] = matrix[countOfLines, countOfColumns];
         minorCol++;
       }
       minorRow++;
@@ -129,7 +128,7 @@ class SquareMatrix {
     return minor;
   }
 
-  public static explicit operator int(SquareMatrix a) { //приведение типа SquareMatrix к типу int (детерминант)
+  public static explicit operator int(SquareMatrix a) { 
     return a.Determinant();
   }
 
@@ -144,7 +143,7 @@ class SquareMatrix {
     return sb.ToString();
   }
 
-  public int CompareTo(SquareMatrix other) { // (по сумме элементов) положительное - матрица а больше б, отрицательное - б больше а, 0 - матрицы равны
+  public int CompareTo(SquareMatrix other) { 
     if (other == null)
       return 1;
 
